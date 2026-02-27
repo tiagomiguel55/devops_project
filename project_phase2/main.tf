@@ -65,7 +65,7 @@ resource "aws_security_group" "website_sg" {
 
 resource "aws_vpc_security_group_ingress_rule" "allow_ssh" {
   security_group_id = aws_security_group.website_sg.id
-  cidr_ipv4         = "x/32" // substitua pelo seu endereço IP público, para permitir acesso SSH apenas a partir do seu IP
+  cidr_ipv4         = "ip/32" // substitua pelo seu endereço IP público, para permitir acesso SSH apenas a partir do seu IP
   from_port         = 22
   ip_protocol       = "tcp"
   to_port           = 22
