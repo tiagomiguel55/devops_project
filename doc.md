@@ -108,23 +108,30 @@ resource "aws_vpc_security_group_egress_rule" "all_outbound" {
 ```
 Nota: O valor -1 para ip_protocol indica que todas as regras de protocolo são permitidas, ou seja, todo o tráfego de saída é permitido.
 
+![alt text](<Captura de ecrã 2026-02-27 183940.png>)
+**Figura x:** Grupo de segurança criado via terraform.
+
+
 ---
 
 Foi criado um recurso de instância EC2, associando o security group, o IAM instance profile e a chave SSH criados anteriormente. A instância EC2 é provisionada com uma imagem Amazon Linux 2, e é configurada para ser acessível via SSH usando a chave privada correspondente à chave pública provisionada.
 
 ``` hcl
-resource "aws_security_group" "website_sg" {
-  name        = "website-sg"
-  description = "Security group for website server"
-  vpc_id      = "vpc-0c747c52a1492d6d2"
+resource "aws_instance" "website-server" {
+  ami                    = "ami-0c5c1b3399d21cdc6" // Amazon Linux 2 AMI (HVM), SSD Volume Type - ami-0c5c1b3399d21cdc6
+  instance_type          = "t3.micro"
+  key_name               = aws_key_pair.tf_key.key_name // associando a chave de acesso à instância, para permitir acesso via SSH
+  vpc_security_group_ids = [aws_security_group.website_sg.id]
+  iam_instance_profile   = aws_iam_instance_profile.test_profile.name
 
   tags = {
-    Name        = "website-sg"
-    Provisioned = "Terraform"
-    Client      = "Tiago Miguel"
+    Name        = "website-server" 
+    Provisioned = "Terraform"      
+    Client      = "Tiago Miguel"   
   }
 }
 ```
-
+![](<Captura de ecrã 2026-02-27 183455.png>)
+**Figura x:** Instância EC2 criada via terraform, associada ao security group e IAM Role criados anteriormente.
 
 
