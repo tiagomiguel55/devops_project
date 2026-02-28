@@ -108,8 +108,8 @@ resource "aws_vpc_security_group_egress_rule" "all_outbound" {
 ```
 Nota: O valor -1 para ip_protocol indica que todas as regras de protocolo são permitidas, ou seja, todo o tráfego de saída é permitido.
 
-![alt text](<Captura de ecrã 2026-02-27 183940.png>)
-**Figura x:** Grupo de segurança criado via terraform.
+![alt text](<project_phase2/documentation/Captura de ecrã 2026-02-27 183940.png>)
+**Figura 1:** Grupo de segurança criado via terraform.
 
 
 ---
@@ -131,7 +131,7 @@ resource "aws_instance" "website-server" {
   }
 }
 ```
-![](<Captura de ecrã 2026-02-27 183455.png>)
-**Figura x:** Instância EC2 criada via terraform, associada ao security group e IAM Role criados anteriormente.
+![alt text](<project_phase2/documentation/Captura de ecrã 2026-02-27 183455.png>)
+**Figura 2:** Instância EC2 criada via terraform, associada ao security group e IAM Role criados anteriormente.
 
 
